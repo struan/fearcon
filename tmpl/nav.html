@@ -12,6 +12,9 @@
 	<a href="{{ login }}">login</a> 
 {% endif %}
 {% if logout %}
-	<a href="{{ logout }}">logout</a>
+	<a href="{{ logout }}">logout</a> 
 {% endif %}
+{% ifnotequal noabout 1 %}
+	<a href="/about/">about</a>
+{% endifnotequal %}
 </p>

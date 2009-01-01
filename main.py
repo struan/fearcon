@@ -62,10 +62,21 @@ class MainHandler(webapp.RequestHandler):
 class GlobalHandler(MainHandler):
   def __init__(self):
     self.global_only = True
+    
+class AboutHandler(webapp.RequestHandler):
+  def get(self):
+    template_values = {
+      'home': '/',
+      'noglobal': 1,
+      'noabout': 1
+    }
+    path = os.path.join(os.path.dirname(__file__), 'tmpl/about.html')
+    self.response.out.write(template.render(path, template_values))
 
 def main():
   application = webapp.WSGIApplication([('/', MainHandler),
-                                        ('/global/', GlobalHandler)],
+                                        ('/global/', GlobalHandler),
+                                        ('/about/', AboutHandler)],
                                        debug=True)
   wsgiref.handlers.CGIHandler().run(application)
 
