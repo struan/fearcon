@@ -44,6 +44,7 @@ class MainHandler(webapp.RequestHandler):
         level.user = users.get_current_user()
         level.level = 3
       logout = users.create_logout_url( '/' )
+      title = 'fearcon : ' + level.user.nickname()
     else:
       avgs = AverageLevel.all()
       if avgs.count() > 0:
@@ -53,10 +54,12 @@ class MainHandler(webapp.RequestHandler):
         avg_level = 3
       level.level = avg_level
       login = users.create_login_url( '/' )
+      title = 'fearcon : global'
         
     template_values = {
       'levels': [ 5, 4, 3, 2, 1 ],
       'current': level.level,
+      'title': title,
       'login': login,
       'logout': logout
     }
