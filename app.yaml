@@ -16,7 +16,7 @@ handlers:
 - url: /update
   script: update.py
   
-- url: /user/(.*)
+- url: /user/.*
   script: user.py
 
 - url: .*

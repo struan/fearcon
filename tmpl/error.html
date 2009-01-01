@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" media="screen" />
+	</head>
+	<body id="index" onload="">
+		<div id="name">
+			<p>
+			{{ msg }}
+			</p>
+			{% if login %}
+				<p><a href="{{ login }}">login</a></p>
+			{% endif %}
+			{% if logout %}
+				<p><a href="{{ logout }}">logout</a></p>
+			{% endif %}
+		</div>
+	</body>
+</html>
