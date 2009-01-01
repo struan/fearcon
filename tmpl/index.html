@@ -8,12 +8,13 @@
 			$(document).ready(function() {
 				$("#fearcon > li").click( setStatus );
 				$("#fearcon > li").fadeTo( 1, 0.25 );
-				$("#fearcon3").fadeTo( 1, 1 );
+				$("#fearcon{{current}}").fadeTo( 1, 1 );
 			});
 			
 			function setStatus( e ) {
 				$("#fearcon > li").fadeTo( 1, 0.25 );
 				$(this).fadeTo( 1, 1 );
+				$.post( '/update', { level: $(this).text() } );
 			}
 		</script>
 		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" media="screen" />
@@ -29,6 +30,9 @@
 					{% endifequal %}
 				{% endfor %}
 			</ul>
+			{% if login %}
+				<a href="{{ login }}">login</a>
+			{% endif %}
 		</div>
 	</body>
 </html>
