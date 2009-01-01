@@ -8,13 +8,15 @@ from google.appengine.api import users
 from fearcon.db import *
 
 class MainHandler(webapp.RequestHandler):
+  def __init__(self):
+    self.global_only = False
 
   def get(self):
     level = UserLevel()
     login = ''
     logout = ''
     
-    if users.get_current_user():
+    if users.get_current_user() and not self.global_only:
       level = UserLevel.get_by_key_name( users.get_current_user().email() )
       if not level:
         level = UserLevel( None, users.get_current_user().email() )
@@ -31,7 +33,10 @@ class MainHandler(webapp.RequestHandler):
       else:
         avg_level = 3
       level.level = avg_level
-      login = users.create_login_url( '/' )
+      if users.get_current_user():
+        logout = users.create_logout_url( '/' )
+      else:
+        login = users.create_login_url( '/' )
       title = 'fearcon : global'
         
     template_values = {
@@ -41,13 +46,21 @@ class MainHandler(webapp.RequestHandler):
       'login': login,
       'logout': logout
     }
+    
+    if self.global_only:
+      template_values[ 'home' ] = '/'
+      template_values[ 'noglobal' ] = 1
+      
     path = os.path.join(os.path.dirname(__file__), 'tmpl/index.html')
     self.response.out.write(template.render(path, template_values))
 
-
+class GlobalHandler(MainHandler):
+  def __init__(self):
+    self.global_only = True
 
 def main():
-  application = webapp.WSGIApplication([('/', MainHandler)],
+  application = webapp.WSGIApplication([('/', MainHandler),
+                                        ('/global/', GlobalHandler)],
                                        debug=True)
   wsgiref.handlers.CGIHandler().run(application)
 
