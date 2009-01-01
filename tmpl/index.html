@@ -21,11 +21,13 @@
 	<body id="index" onload="">
 		<div id="name">
 			<ul id="fearcon">
-				<li class="off" id="fearcon5">5</li>
-				<li class="off" id="fearcon4">4</li>
-				<li class="current" id="fearcon3">3</li>
-				<li class="off" id="fearcon2">2</li>
-				<li class="off" id="fearcon1">1</li>
+				{% for level in levels %}
+					{% ifequal current level %}
+						<li class="off" id="fearcon{{ level }}">{{ level }}</li>
+					{% else %}
+						<li class="off" id="fearcon{{ level }}">{{ level }}</li>
+					{% endifequal %}
+				{% endfor %}
 			</ul>
 		</div>
 	</body>

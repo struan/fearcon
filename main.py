@@ -24,7 +24,8 @@ class MainHandler(webapp.RequestHandler):
 
   def get(self):
     template_values = {
-        'greeting': 'hello world'
+        'levels': [ 5, 4, 3, 2, 1 ],
+        'current': 3
     }
     path = os.path.join(os.path.dirname(__file__), 'tmpl/index.html')
     self.response.out.write(template.render(path, template_values))
