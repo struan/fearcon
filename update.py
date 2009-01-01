@@ -24,6 +24,7 @@ class ChangeLevel(webapp.RequestHandler):
       if not level:
         level = UserLevel( None, users.get_current_user().email() )
         level.user = users.get_current_user()
+        level.nick = level.user.nickname()
         avg.count += 1
         avg.total += new_level
       else:

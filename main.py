@@ -19,6 +19,7 @@ class MainHandler(webapp.RequestHandler):
       if not level:
         level = UserLevel( None, users.get_current_user().email() )
         level.user = users.get_current_user()
+        level.nick = level.user.nickname()
         level.level = 3
       logout = users.create_logout_url( '/' )
       title = 'fearcon : ' + level.user.nickname()
