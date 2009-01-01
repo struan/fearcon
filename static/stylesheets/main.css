@@ -1,3 +1,34 @@
-body {
-    font-family: verdana, sans-serif;
+#fearcon {
+	width: 25%;
+	margin: auto;
+}
+
+#fearcon li {
+	color: white;
+	list-style-type: none;
+	text-align: center;
+	font: 3em verdana, helvetica, sans-serif;
+	padding-top: 0.25em;
+	padding-bottom	: 0.25em;
+	cursor: pointer;
+}
+
+#fearcon5 {
+	background-color: red;
+}
+
+#fearcon4 {
+	background-color: orange;
+}
+
+#fearcon3 {
+	background-color: yellow;
+}
+
+#fearcon2 {
+	background-color: blue;
+}
+
+#fearcon1 {
+	background-color: green;			
 }

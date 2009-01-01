@@ -1,9 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-    <head>
-        <title></title>
-        <link href="/stylesheets/main.css" rel="stylesheet" />
-    </head>
-    <body>
-        {{ greeting|escape }}
-    </body>
+	<head>
+		<title>fearcon</title>
+		<script type="text/javascript" charset="utf-8" src="/js/jquery-1.2.6.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				$("#fearcon > li").click( setStatus );
+				$("#fearcon > li").fadeTo( 1, 0.25 );
+				$("#fearcon3").fadeTo( 1, 1 );
+			});
+			
+			function setStatus( e ) {
+				$("#fearcon > li").fadeTo( 1, 0.25 );
+				$(this).fadeTo( 1, 1 );
+			}
+		</script>
+		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" media="screen" />
+	</head>
+	<body id="index" onload="">
+		<div id="name">
+			<ul id="fearcon">
+				<li class="off" id="fearcon5">5</li>
+				<li class="off" id="fearcon4">4</li>
+				<li class="current" id="fearcon3">3</li>
+				<li class="off" id="fearcon2">2</li>
+				<li class="off" id="fearcon1">1</li>
+			</ul>
+		</div>
+	</body>
 </html>
