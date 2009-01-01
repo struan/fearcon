@@ -2,10 +2,12 @@
 {% if home %}
 	<a href="{{ home }}">home</a> 
 {% endif %}
-{{ global }}
 {% ifnotequal noglobal 1 %}
 	<a href="/global/">global</a>
 {% endifnotequal %}
+{% if user %}
+	<a href="{{ user }}">you</a>
+{% endif %}
 {% if login %}
 	<a href="{{ login }}">login</a> 
 {% endif %}

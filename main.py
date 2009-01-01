@@ -2,6 +2,7 @@
 
 import wsgiref.handlers
 import os
+from urllib import quote_plus
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
@@ -15,6 +16,7 @@ class MainHandler(webapp.RequestHandler):
     level = UserLevel()
     login = ''
     logout = ''
+    user = ''
     
     if users.get_current_user() and not self.global_only:
       level = UserLevel.get_by_key_name( users.get_current_user().email() )
@@ -25,6 +27,7 @@ class MainHandler(webapp.RequestHandler):
         level.level = 3
       logout = users.create_logout_url( '/' )
       title = 'fearcon : ' + level.user.nickname()
+      user = '/user/' + quote_plus( level.user.nickname() )
     else:
       avgs = AverageLevel.all()
       if avgs.count() > 0:
@@ -34,6 +37,7 @@ class MainHandler(webapp.RequestHandler):
         avg_level = 3
       level.level = avg_level
       if users.get_current_user():
+        user = '/user/' + quote_plus( users.get_current_user().nickname() )
         logout = users.create_logout_url( '/' )
       else:
         login = users.create_login_url( '/' )
@@ -42,6 +46,7 @@ class MainHandler(webapp.RequestHandler):
     template_values = {
       'levels': [ 5, 4, 3, 2, 1 ],
       'current': level.level,
+      'user': user,
       'title': title,
       'login': login,
       'logout': logout
