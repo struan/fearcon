@@ -10,12 +10,7 @@
 			<p>
 			{{ msg }}
 			</p>
-			{% if login %}
-				<p><a href="{{ login }}">login</a></p>
-			{% endif %}
-			{% if logout %}
-				<p><a href="{{ logout }}">logout</a></p>
-			{% endif %}
+			{% include 'nav.html' %}
 		</div>
 	</body>
 </html>

@@ -1,6 +1,7 @@
 #fearcon {
 	width: 25%;
 	margin: auto;
+	padding: 0em;
 }
 
 #fearcon li {
@@ -8,6 +9,7 @@
 	list-style-type: none;
 	text-align: center;
 	font: 3em verdana, helvetica, sans-serif;
+	padding: 0em;
 	padding-top: 0.25em;
 	padding-bottom	: 0.25em;
 	cursor: pointer;
@@ -31,4 +33,18 @@
 
 #fearcon1 {
 	background-color: green;			
+}
+
+p {
+  padding-top: 2em;
+  width: 25%;
+	margin: auto;
+	text-align: center;
+	font: 0.75em verdana, helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  border-bottom: 1px dotted #666;
+  color: #333;
 }

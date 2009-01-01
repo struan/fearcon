@@ -33,12 +33,7 @@
 					{% endifequal %}
 				{% endfor %}
 			</ul>
-			{% if login %}
-				<a href="{{ login }}">login</a>
-			{% endif %}
-			{% if logout %}
-				<a href="{{ logout }}">logout</a>
-			{% endif %}
+			{% include 'nav.html' %}
 		</div>
 	</body>
 </html>

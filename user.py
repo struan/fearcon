@@ -41,6 +41,7 @@ class MainHandler(webapp.RequestHandler):
       'levels': [ 5, 4, 3, 2, 1 ],
       'title': title,
       'msg': msg,
+      'home': '/',
       'login': login,
       'logout': logout
     }
