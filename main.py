@@ -25,12 +25,17 @@ from google.appengine.api import users
 class UserLevel(db.Model):
   user = db.UserProperty()
   level = db.IntegerProperty()
+  
+class AverageLevel(db.Model):
+  total = db.IntegerProperty()
+  count = db.IntegerProperty()
 
 class MainHandler(webapp.RequestHandler):
 
   def get(self):
     level = UserLevel()
     login = ''
+    logout = ''
     
     if users.get_current_user():
       level = UserLevel.get_by_key_name( users.get_current_user().email() )
@@ -38,14 +43,22 @@ class MainHandler(webapp.RequestHandler):
         level = UserLevel( None, users.get_current_user().email() )
         level.user = users.get_current_user()
         level.level = 3
+      logout = users.create_logout_url( '/' )
     else:
-      level.level = 3
+      avgs = AverageLevel.all()
+      if avgs.count() > 0:
+        avg = avgs[0]
+        avg_level = int( avg.total / avg.count )
+      else:
+        avg_level = 3
+      level.level = avg_level
       login = users.create_login_url( '/' )
         
     template_values = {
       'levels': [ 5, 4, 3, 2, 1 ],
       'current': level.level,
-      'login': login
+      'login': login,
+      'logout': logout
     }
     path = os.path.join(os.path.dirname(__file__), 'tmpl/index.html')
     self.response.out.write(template.render(path, template_values))
@@ -54,13 +67,28 @@ class ChangeLevel(webapp.RequestHandler):
   def post(self):
     if users.get_current_user():
       level = UserLevel.get_by_key_name( users.get_current_user().email() )
+      new_level = int( self.request.get('level') )
+      avgs = AverageLevel.all()
+      
+      if avgs.count() > 0:
+        avg = avgs[0]
+      else:
+        avg = AverageLevel()
+        avg.total = 0
+        avg.count = 0
       
       if not level:
         level = UserLevel( None, users.get_current_user().email() )
         level.user = users.get_current_user()
+        avg.count += 1
+        avg.total += new_level
+      else:
+        avg.total -= level.level
+        avg.total += new_level
         
-      level.level = int( self.request.get('level') )
+      level.level = new_level
       level.put()
+      avg.put()
     self.response.out.write('OK')
     
 
