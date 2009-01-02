@@ -9,7 +9,7 @@
 			current_level = {{ current }};
 			
 			$(document).ready(function() {
-				{% if logout %}
+				{% if logout and not noglobal %}
 				$("#fearcon > li").click( setStatus );
 				{% endif %}
 				$("#fearcon > li").fadeTo( 1, 0.25 );
