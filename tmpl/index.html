@@ -6,6 +6,8 @@
 		<script type="text/javascript" charset="utf-8" src="/js/jquery-1.2.6.min.js"></script>
 
 		<script type="text/javascript" charset="utf-8">
+			current_level = {{ current }};
+			
 			$(document).ready(function() {
 				{% if logout %}
 				$("#fearcon > li").click( setStatus );
@@ -17,7 +19,9 @@
 			function setStatus( e ) {
 				$("#fearcon > li").fadeTo( 1, 0.25 );
 				$(this).fadeTo( 1, 1 );
-				$.post( '/update', { level: $(this).text() } );
+				$.post( '/update_user', { level: $(this).text() } );
+				$.post( '/update_total', { new_level: $(this).text(), old_level: current_level } );
+				current_level = $(this).text();
 			}
 		</script>
 		<link href="/stylesheets/main.css" rel="stylesheet" type="text/css" media="screen" />
