@@ -13,7 +13,7 @@ handlers:
 - url: /js
   static_dir: static/js
 
-- url: /update_*
+- url: /update_.*
   script: update.py
   
 - url: /user/.*
