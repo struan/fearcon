@@ -6,5 +6,5 @@ class UserLevel(db.Model):
   nick = db.StringProperty()
   
 class AverageLevel(db.Model):
-  total = db.IntegerProperty()
-  count = db.IntegerProperty()
+  total = db.IntegerProperty( default=0 )
+  count = db.IntegerProperty( default=0 )

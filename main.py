@@ -17,10 +17,12 @@ class MainHandler(webapp.RequestHandler):
     login = ''
     logout = ''
     user = ''
+    is_new_user = 0
     
     if users.get_current_user() and not self.global_only:
       level = UserLevel.get_by_key_name( users.get_current_user().email() )
       if not level:
+        is_new_user = 1
         level = UserLevel( None, users.get_current_user().email() )
         level.user = users.get_current_user()
         level.nick = level.user.nickname()
@@ -46,6 +48,7 @@ class MainHandler(webapp.RequestHandler):
     template_values = {
       'levels': [ 5, 4, 3, 2, 1 ],
       'current': level.level,
+      'is_new_user': is_new_user,
       'user': user,
       'title': title,
       'login': login,

@@ -6,7 +6,11 @@
 		<script type="text/javascript" charset="utf-8" src="/js/jquery-1.2.6.min.js"></script>
 
 		<script type="text/javascript" charset="utf-8">
+			{% ifequal is_new_user 1 %}
+			current_level = 0;
+			{% else %}
 			current_level = {{ current }};
+			{% endifequal %}
 			
 			$(document).ready(function() {
 				{% if logout and not noglobal %}

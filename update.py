@@ -26,14 +26,7 @@ class ChangeTotalLevel(webapp.RequestHandler):
   def post(self):
     old_level = int( self.request.get('old_level') )
     new_level = int( self.request.get('new_level') )
-    avgs = db.Query(AverageLevel)
-
-    if avgs:
-      avg = avgs.get()
-    else:
-      avg = AverageLevel()
-      avg.total = 0
-      avg.count = 0
+    avg = AverageLevel.get_or_insert( 'global' )
       
     if old_level == 0:
       avg.count += 1
